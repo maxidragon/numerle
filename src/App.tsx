@@ -11,7 +11,7 @@ function App() {
   const [number, setNumber] = useState<number[]>([1, 2, 3, 4, 5]);
   const [guesses, setGuesses] = useState<Guess[]>(initialState);
   const [currentRow, setCurrentRow] = useState<number>(1);
-  const availableNumbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const availableNumbers: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [numberRevealed, setNumberRevelaed] = useState<boolean>(false);
 
   const newGame = () => {
@@ -86,6 +86,7 @@ function App() {
             placeholder="Enter your guess"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
+                checkIfGameEnds();
                 if (guesses.find((guess) => guess.rowNumber === currentRow)?.number.length !== 5) return toast({
                   title: "Invalid input",
                   description: "Please enter 5 numbesrs",
@@ -100,7 +101,6 @@ function App() {
                     return guess;
                   }
                 }));
-                checkIfGameEnds();
                 if (currentRow < 6) {
                   setCurrentRow(currentRow + 1);
                 }
