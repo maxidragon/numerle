@@ -35,17 +35,18 @@ function App() {
         duration: 5000,
         isClosable: true,
       });
+    } else {
+      toast({
+        title: `You guessed incorrectly!`,
+        description: `The number was ${number.join("")}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });  
     }
     if (currentRow !== 6) {
       return;
     }
-    toast({
-      title: `You guessed incorrectly!`,
-      description: `The number was ${number.join("")}`,
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-    });
     setNumberRevelaed(true);
 
   };
@@ -83,6 +84,7 @@ function App() {
             }
             ));
           }}
+            autoFocus
             placeholder="Enter your guess"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -111,7 +113,7 @@ function App() {
         </Box>
         <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
           {availableNumbers.map((availableNumber: number) => (
-            <NumberBox number={availableNumber} size={75} key={availableNumber} backgroundColor={getColor(guesses, availableNumber)} /> 
+            <NumberBox number={availableNumber} size={75} key={availableNumber} backgroundColor={getColor(guesses, availableNumber)} />
           ))}
         </Box>
       </Box>
