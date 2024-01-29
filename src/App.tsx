@@ -16,8 +16,8 @@ function App() {
 
   const newGame = () => {
     const randomNumber = generateNewNumber();
-    setNumber(randomNumber);
     setGuesses(initialState);
+    setNumber(randomNumber);
     setNumberRevelaed(false);
     setCurrentRow(1);
   };
@@ -35,19 +35,22 @@ function App() {
         duration: 5000,
         isClosable: true,
       });
+      setNumberRevelaed(true);
+      return;
     } else {
+      if (currentRow !== 6) {
+        return;
+      }
       toast({
         title: `You guessed incorrectly!`,
         description: `The number was ${number.join("")}`,
         status: "error",
         duration: 5000,
         isClosable: true,
-      });  
-    }
-    if (currentRow !== 6) {
+      });
+      setNumberRevelaed(true);
       return;
     }
-    setNumberRevelaed(true);
 
   };
 
